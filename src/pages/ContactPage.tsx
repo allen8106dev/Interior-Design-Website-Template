@@ -15,9 +15,9 @@ export function ContactPage() {
   return (
     <PageContainer>
       <PageHero
-        eyebrow="Contact"
-        title="Book a consultation."
-        description="Share a few details about your space. Prefer messaging? WhatsApp is always available."
+        eyebrow={siteConfig.sections.contactPage.eyebrow}
+        title={siteConfig.sections.contactPage.title}
+        description={siteConfig.sections.contactPage.description}
       />
       <Contact showMap />
       <FAQ />

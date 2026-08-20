@@ -1,4 +1,4 @@
-import { ArrowRight, MessageCircle } from 'lucide-react'
+import { MessageCircle } from 'lucide-react'
 import { siteConfig } from '@/data/siteConfig'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
@@ -10,10 +10,9 @@ interface CTAProps {
   description?: string
 }
 
-export function CTA({
-  title = 'Ready to reshape your space?',
-  description = 'Tell us about your home or workplace. We’ll help you understand scope, timeline, and the right next step.',
-}: CTAProps) {
+export function CTA({ title, description }: CTAProps) {
+  const copy = siteConfig.sections.cta
+
   return (
     <section className="relative overflow-hidden bg-[var(--color-accent)] py-20 text-white lg:py-24">
       <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-white/5" />
@@ -22,30 +21,29 @@ export function CTA({
         <Reveal>
           <div className="mx-auto max-w-3xl text-center">
             <p className="text-xs font-medium uppercase tracking-[0.24em] text-white/60">
-              Start a conversation
+              {copy.eyebrow}
             </p>
             <h2 className="mt-4 font-display text-3xl font-medium text-balance sm:text-4xl lg:text-5xl">
-              {title}
+              {title ?? copy.title}
             </h2>
             <p className="mx-auto mt-5 max-w-2xl text-base leading-relaxed text-white/75 sm:text-lg">
-              {description}
+              {description ?? copy.description}
             </p>
-            <div className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <div className="mt-9 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
               <Button
-                href={siteConfig.ctas.consultation.href}
+                href={siteConfig.ctas.startProject.href}
                 variant="secondary"
                 size="lg"
-                className="bg-white text-[var(--color-ink)] hover:bg-[var(--color-canvas)]"
-                icon={<ArrowRight size={18} />}
+                className="w-full bg-white text-[var(--color-ink)] hover:bg-[var(--color-canvas)] sm:w-auto"
               >
-                {siteConfig.ctas.consultation.label}
+                {siteConfig.ctas.startProject.label}
               </Button>
               <Button
                 href={getWhatsAppUrl()}
                 external
                 variant="outline"
                 size="lg"
-                className="border-white/40 text-white hover:bg-white hover:text-[var(--color-ink)]"
+                className="w-full border-white/40 text-white hover:bg-white hover:text-[var(--color-ink)] sm:w-auto"
                 icon={<MessageCircle size={18} />}
               >
                 {siteConfig.ctas.whatsapp.label}

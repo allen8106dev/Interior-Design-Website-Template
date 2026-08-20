@@ -19,9 +19,9 @@ export function ProjectsPage() {
   return (
     <PageContainer>
       <PageHero
-        eyebrow="Projects"
-        title="A selection of spaces we’ve shaped."
-        description="DEMO PROJECTS — replace covers, galleries, and case-study copy with real client work before deployment."
+        eyebrow={siteConfig.sections.projectsPage.eyebrow}
+        title={siteConfig.sections.projectsPage.title}
+        description={siteConfig.sections.projectsPage.description}
       />
 
       <section className="py-16 lg:py-20">

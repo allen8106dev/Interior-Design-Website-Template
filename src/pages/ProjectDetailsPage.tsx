@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { ArrowLeft, ArrowRight } from 'lucide-react'
+import { ArrowLeft, ArrowRight, MessageCircle } from 'lucide-react'
 import { PageContainer } from '@/components/layout/PageContainer'
 import { CTA } from '@/components/sections/CTA'
 import { ProjectCard } from '@/components/sections/ProjectCard'
@@ -10,7 +10,7 @@ import { ImageWithFallback } from '@/components/ui/ImageWithFallback'
 import { Reveal } from '@/components/ui/Reveal'
 import { useSeo } from '@/hooks/useSeo'
 import { siteConfig } from '@/data/siteConfig'
-import { getProjectBySlug } from '@/utils/site'
+import { getProjectBySlug, getWhatsAppUrl } from '@/utils/site'
 import { getAbsoluteAppUrl } from '@/utils/basePath'
 import { useEffect } from 'react'
 
@@ -79,57 +79,82 @@ export function ProjectDetailsPage() {
   }
 
   const related = siteConfig.projects.filter((p) => p.id !== project.id).slice(0, 3)
+  const hasMaterials = Boolean(project.materials?.length)
+  const hasElements = Boolean(project.designElements?.length)
 
   return (
     <PageContainer>
-      <section className="relative min-h-[60vh] overflow-hidden bg-[var(--color-ink)] lg:min-h-[70vh]">
+      {/* Full-bleed project hero */}
+      <section className="relative min-h-[55svh] overflow-hidden bg-[var(--color-ink)] sm:min-h-[60vh] lg:min-h-[70vh]">
         <ImageWithFallback
           src={project.coverImage}
           alt={project.coverImageAlt}
           loading="eager"
           fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover opacity-75"
+          className="absolute inset-0 h-full w-full object-cover object-center opacity-75"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/25" />
-        <Container className="relative flex min-h-[60vh] flex-col justify-end pb-12 pt-28 text-white lg:min-h-[70vh] lg:pb-16">
+        <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/40 to-black/25" />
+        <Container className="relative flex min-h-[55svh] flex-col justify-end pb-10 pt-28 text-white sm:min-h-[60vh] sm:pb-12 lg:min-h-[70vh] lg:pb-16">
           <Link
             to="/projects"
-            className="mb-6 inline-flex w-fit items-center gap-2 text-sm text-white/75 transition hover:text-white"
+            className="mb-5 inline-flex w-fit items-center gap-2 text-sm text-white/75 transition hover:text-white sm:mb-6"
           >
             <ArrowLeft size={16} />
             All projects
           </Link>
-          <p className="text-xs uppercase tracking-[0.22em] text-white/65">
-            {project.category} · {project.location} · {project.year}
-          </p>
-          <h1 className="mt-3 max-w-4xl font-display text-4xl font-medium sm:text-5xl lg:text-6xl">
+          <h1 className="max-w-4xl font-display text-4xl font-medium leading-[1.08] sm:text-5xl lg:text-6xl">
             {project.title}
           </h1>
+          <dl className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/75 sm:mt-6 sm:gap-x-8">
+            <div>
+              <dt className="sr-only">Location</dt>
+              <dd>{project.location}</dd>
+            </div>
+            <div>
+              <dt className="sr-only">Project type</dt>
+              <dd>{project.category}</dd>
+            </div>
+            <div>
+              <dt className="sr-only">Year</dt>
+              <dd>{project.year}</dd>
+            </div>
+          </dl>
         </Container>
       </section>
 
-      <section className="py-16 lg:py-20">
+      {/* Concept + project details */}
+      <section className="py-14 sm:py-16 lg:py-20">
         <Container>
           <div className="grid gap-12 lg:grid-cols-[1.4fr_0.8fr] lg:gap-16">
             <Reveal>
               <div>
-                <h2 className="font-display text-3xl text-[var(--color-ink)]">Overview</h2>
-                <p className="mt-4 text-base leading-relaxed text-[var(--color-ink-muted)] sm:text-lg">
+                <p className="text-xs uppercase tracking-[0.2em] text-[var(--color-ink-muted)]">
+                  Concept
+                </p>
+                <p className="mt-4 text-base leading-relaxed text-[var(--color-ink-soft)] sm:text-lg">
                   {project.description}
                 </p>
 
                 {project.challenge ? (
                   <div className="mt-10">
-                    <h3 className="font-display text-2xl text-[var(--color-ink)]">Design challenge</h3>
-                    <p className="mt-3 leading-relaxed text-[var(--color-ink-muted)]">{project.challenge}</p>
+                    <h2 className="font-display text-2xl text-[var(--color-ink)] sm:text-3xl">
+                      Design challenge
+                    </h2>
+                    <p className="mt-3 leading-relaxed text-[var(--color-ink-muted)]">
+                      {project.challenge}
+                    </p>
                   </div>
                 ) : null}
 
                 {project.solution ? (
                   <div className="mt-10">
-                    <h3 className="font-display text-2xl text-[var(--color-ink)]">Design solution</h3>
-                    <p className="mt-3 leading-relaxed text-[var(--color-ink-muted)]">{project.solution}</p>
+                    <h2 className="font-display text-2xl text-[var(--color-ink)] sm:text-3xl">
+                      Design solution
+                    </h2>
+                    <p className="mt-3 leading-relaxed text-[var(--color-ink-muted)]">
+                      {project.solution}
+                    </p>
                   </div>
                 ) : null}
               </div>
@@ -146,7 +171,7 @@ export function ProjectDetailsPage() {
                     <dd className="text-right text-[var(--color-ink)]">{project.location}</dd>
                   </div>
                   <div className="flex justify-between gap-4 border-b border-[var(--color-border)] pb-3">
-                    <dt className="text-[var(--color-ink-muted)]">Category</dt>
+                    <dt className="text-[var(--color-ink-muted)]">Project type</dt>
                     <dd className="text-right text-[var(--color-ink)]">{project.category}</dd>
                   </div>
                   <div className="flex justify-between gap-4 border-b border-[var(--color-border)] pb-3">
@@ -178,9 +203,19 @@ export function ProjectDetailsPage() {
                     ))}
                   </ul>
                 </div>
-                <div className="mt-8">
-                  <Button href="/contact" icon={<ArrowRight size={16} />}>
-                    Discuss a similar project
+                <div className="mt-8 flex flex-col gap-3">
+                  <Button href={siteConfig.ctas.consultation.href} icon={<ArrowRight size={16} />}>
+                    {siteConfig.ctas.consultation.label}
+                  </Button>
+                  <Button
+                    href={getWhatsAppUrl(
+                      `Hello ${siteConfig.company.name}, I’m interested in a project similar to “${project.title}”.`,
+                    )}
+                    external
+                    variant="whatsapp"
+                    icon={<MessageCircle size={16} />}
+                  >
+                    {siteConfig.ctas.whatsapp.label}
                   </Button>
                 </div>
               </aside>
@@ -189,15 +224,66 @@ export function ProjectDetailsPage() {
         </Container>
       </section>
 
-      <section className="bg-[var(--color-canvas-muted)] py-16 lg:py-20">
+      {/* Photography */}
+      <section className="bg-[var(--color-canvas-muted)] py-14 sm:py-16 lg:py-20">
         <Container>
-          <h2 className="mb-8 font-display text-3xl text-[var(--color-ink)] sm:text-4xl">Gallery</h2>
+          <h2 className="mb-8 font-display text-3xl text-[var(--color-ink)] sm:text-4xl">
+            Project photography
+          </h2>
           <Gallery images={project.gallery} />
         </Container>
       </section>
 
+      {/* Materials & design elements */}
+      {hasMaterials || hasElements ? (
+        <section className="py-14 sm:py-16 lg:py-20">
+          <Container>
+            <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
+              {hasMaterials ? (
+                <Reveal>
+                  <div>
+                    <h2 className="font-display text-2xl text-[var(--color-ink)] sm:text-3xl">
+                      Materials
+                    </h2>
+                    <ul className="mt-6 space-y-3">
+                      {project.materials!.map((item) => (
+                        <li
+                          key={item}
+                          className="border-b border-[var(--color-border)] pb-3 text-[var(--color-ink-soft)]"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              ) : null}
+              {hasElements ? (
+                <Reveal delayMs={hasMaterials ? 80 : 0}>
+                  <div>
+                    <h2 className="font-display text-2xl text-[var(--color-ink)] sm:text-3xl">
+                      Design elements
+                    </h2>
+                    <ul className="mt-6 space-y-3">
+                      {project.designElements!.map((item) => (
+                        <li
+                          key={item}
+                          className="border-b border-[var(--color-border)] pb-3 text-[var(--color-ink-soft)]"
+                        >
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              ) : null}
+            </div>
+          </Container>
+        </section>
+      ) : null}
+
       {related.length ? (
-        <section className="py-16 lg:py-20">
+        <section className="border-t border-[var(--color-border)] py-14 sm:py-16 lg:py-20">
           <Container>
             <h2 className="mb-8 font-display text-3xl text-[var(--color-ink)]">More projects</h2>
             <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6">
@@ -209,7 +295,10 @@ export function ProjectDetailsPage() {
         </section>
       ) : null}
 
-      <CTA />
+      <CTA
+        title="Inspired by this project?"
+        description="Book a consultation or message us on WhatsApp — we’ll help you understand whether a similar approach fits your space."
+      />
     </PageContainer>
   )
 }

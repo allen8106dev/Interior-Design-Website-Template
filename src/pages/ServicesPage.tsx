@@ -19,9 +19,9 @@ export function ServicesPage() {
   return (
     <PageContainer>
       <PageHero
-        eyebrow="Services"
-        title="Design services with clear scope and calm execution."
-        description="Every offering below is driven by siteConfig.services — swap titles, copy, and imagery per client."
+        eyebrow={siteConfig.sections.servicesPage.eyebrow}
+        title={siteConfig.sections.servicesPage.title}
+        description={siteConfig.sections.servicesPage.description}
       />
 
       <section className="py-16 lg:py-20">

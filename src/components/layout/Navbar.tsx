@@ -83,16 +83,23 @@ export function Navbar() {
           </Button>
         </div>
 
-        <button
-          type="button"
-          className="relative z-50 flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] text-[var(--color-ink)] lg:hidden"
-          aria-expanded={open}
-          aria-controls={menuId}
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
+        <div className="relative z-50 flex items-center gap-2 lg:hidden">
+          {!open ? (
+            <Button href={siteConfig.ctas.primary.href} size="sm" className="px-3 text-xs sm:px-4 sm:text-sm">
+              {siteConfig.ctas.enquire.label}
+            </Button>
+          ) : null}
+          <button
+            type="button"
+            className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] text-[var(--color-ink)]"
+            aria-expanded={open}
+            aria-controls={menuId}
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            onClick={() => setOpen((v) => !v)}
+          >
+            {open ? <X size={22} /> : <Menu size={22} />}
+          </button>
+        </div>
       </Container>
 
       <div
@@ -121,7 +128,7 @@ export function Navbar() {
               </li>
             ))}
           </ul>
-          <Button href={siteConfig.ctas.primary.href} size="lg" onClick={() => setOpen(false)}>
+          <Button href={siteConfig.ctas.primary.href} size="lg" className="w-full" onClick={() => setOpen(false)}>
             {siteConfig.ctas.primary.label}
           </Button>
         </nav>

@@ -70,7 +70,12 @@ Edit `src/data/siteConfig.ts` → `company`
 - Phone, WhatsApp, email
 - Address, service areas, map links
 
-### 2. Colors / branding
+### 2. CTAs & section copy
+
+- `ctas` — Book a Consultation, WhatsApp Us, Enquire Now, Start Your Project
+- `sections` — headlines for home sections and page heroes
+
+### 3. Colors / branding
 
 **Tokens (recommended):** `src/index.css` inside `@theme`
 
@@ -85,7 +90,7 @@ Edit `src/data/siteConfig.ts` → `company`
 
 Also update `branding.primaryColor` / `accentColor` in `siteConfig` for documentation and future theming.
 
-### 3. Images
+### 4. Images
 
 All demo images are referenced from `siteConfig`:
 
@@ -102,44 +107,46 @@ Example local path:
 coverImage: '/images/clients/modern-3bhk-cover.jpg'
 ```
 
-### 4. Projects
+### 5. Projects
 
 `siteConfig.projects` — each item supports:
 
-- title, location, category, year
+- title, location, category (project type), year
 - cover + gallery
 - description, challenge, solution
+- materials, designElements
 - servicesProvided, area, duration, featured
 
-Project URLs: `/projects/{slug}`
+Project URLs: `/#/projects/{slug}` (hash routing)
 
-### 5. Services
+### 6. Services
 
 `siteConfig.services`
 
-### 6. Testimonials
+### 7. Testimonials & press
 
-`siteConfig.testimonials`  
-**Only publish reviews you have permission to use.** Demo reviews are clearly labeled.
+- `testimonials` — **only publish reviews you have permission to use**
+- `press` — optional; leave `[]` or use only real approved credits (demo labels are clearly marked)
 
-### 7. FAQs, process, differentiators, stats
+### 8. FAQs, process, differentiators, stats
 
 - `faqs`
 - `process`
 - `differentiators`
 - `stats` ← mark verified numbers only
 
-### 8. Contact / WhatsApp
+### 9. Contact / WhatsApp
 
 WhatsApp links are generated from `company.whatsapp` (digits with country code, no `+`).
 
 Form wiring: set `formEndpoint` in `siteConfig` to Formspree / your API.  
 Logic lives in `src/services/formService.ts` — UI stays untouched.
 
-### 9. SEO
+### 10. SEO
 
 - `siteConfig.seo` (title, description, siteUrl, ogImage)
 - Per-page titles via `useSeo` in each page
+- Static fallbacks in `index.html`
 - JSON-LD LocalBusiness / Organization / Services injected in `StructuredData`
 
 Update `seo.siteUrl` before production.
@@ -203,12 +210,12 @@ No component rewrites required for a standard brochure + portfolio site.
 
 ## Lead generation features
 
-- Sticky navbar CTA: Book a Consultation
-- Hero primary / secondary CTAs
-- WhatsApp buttons (dynamic)
-- Mid-page CTA band
-- Contact form abstraction
-- Project detail → discuss similar project
+- Sticky navbar CTA: Book a Consultation (desktop) / Enquire Now (mobile)
+- Hero primary CTA: Book a Consultation
+- WhatsApp float with visible label on all breakpoints
+- Mid-page CTA: Start Your Project + WhatsApp Us
+- Contact form: Enquire Now + WhatsApp
+- Project detail: consultation + WhatsApp with project context
 
 ---
 

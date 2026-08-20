@@ -11,9 +11,9 @@ export function WhyChooseUs() {
     <section className="py-20 lg:py-28" aria-labelledby="why-heading">
       <Container>
         <SectionHeading
-          eyebrow="Why choose us"
-          title="Design discipline with delivery you can trust."
-          description="Differentiators are fully configurable — tailor this list to each studio’s real strengths."
+          eyebrow={siteConfig.sections.whyChooseUs.eyebrow}
+          title={siteConfig.sections.whyChooseUs.title}
+          description={siteConfig.sections.whyChooseUs.description}
           className="mb-12 sm:mb-14"
           titleAs="h2"
         />

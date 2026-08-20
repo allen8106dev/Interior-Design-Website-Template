@@ -43,9 +43,9 @@ export function Contact({ showMap = true, compact = false }: ContactProps) {
       <Container>
         <div className="mb-12 sm:mb-14">
           <SectionHeading
-            eyebrow="Contact"
-            title="Let’s talk about your project."
-            description="Call, WhatsApp, or send a short brief — whichever feels easiest."
+            eyebrow={siteConfig.sections.contact.eyebrow}
+            title={siteConfig.sections.contact.title}
+            description={siteConfig.sections.contact.description}
             titleAs="h2"
           />
           <h2 id="contact-heading" className="sr-only">
@@ -215,10 +215,17 @@ export function Contact({ showMap = true, compact = false }: ContactProps) {
               </div>
 
               <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <Button type="submit" size="lg" disabled={status === 'loading'}>
-                  {status === 'loading' ? 'Sending…' : 'Get a Quote'}
+                <Button type="submit" size="lg" disabled={status === 'loading'} className="w-full sm:w-auto">
+                  {status === 'loading' ? 'Sending…' : siteConfig.ctas.enquire.label}
                 </Button>
-                <Button href={getWhatsAppUrl()} external variant="whatsapp" size="lg" icon={<MessageCircle size={18} />}>
+                <Button
+                  href={getWhatsAppUrl()}
+                  external
+                  variant="whatsapp"
+                  size="lg"
+                  className="w-full sm:w-auto"
+                  icon={<MessageCircle size={18} />}
+                >
                   {siteConfig.ctas.whatsapp.label}
                 </Button>
               </div>

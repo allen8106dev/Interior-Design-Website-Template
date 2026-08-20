@@ -23,9 +23,9 @@ export function Testimonials() {
     <section className="bg-[var(--color-canvas-muted)] py-20 lg:py-28" aria-labelledby="testimonials-heading">
       <Container>
         <SectionHeading
-          eyebrow="Client voices"
-          title="What collaboration can feel like."
-          description="DEMO TESTIMONIALS — replace with real reviews and written permission before client deployment."
+          eyebrow={siteConfig.sections.testimonials.eyebrow}
+          title={siteConfig.sections.testimonials.title}
+          description={siteConfig.sections.testimonials.description}
           className="mb-12 sm:mb-14"
           titleAs="h2"
         />

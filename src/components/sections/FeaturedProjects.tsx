@@ -4,6 +4,7 @@ import { Container } from '@/components/ui/Container'
 import { Reveal } from '@/components/ui/Reveal'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { ProjectCard } from './ProjectCard'
+import { siteConfig } from '@/data/siteConfig'
 import { getFeaturedProjects } from '@/utils/site'
 
 interface FeaturedProjectsProps {
@@ -32,9 +33,9 @@ export function FeaturedProjects({ limit = 4 }: FeaturedProjectsProps) {
       <Container>
         <div className="mb-12 flex flex-col gap-6 sm:mb-14 lg:flex-row lg:items-end lg:justify-between">
           <SectionHeading
-            eyebrow="Selected work"
-            title="Interiors that feel lived-in from day one."
-            description="Demo projects for layout and storytelling — replace with your client’s real photography and case studies."
+            eyebrow={siteConfig.sections.featuredProjects.eyebrow}
+            title={siteConfig.sections.featuredProjects.title}
+            description={siteConfig.sections.featuredProjects.description}
             titleAs="h2"
           />
           <Link
@@ -42,7 +43,7 @@ export function FeaturedProjects({ limit = 4 }: FeaturedProjectsProps) {
             id="projects-heading"
             className="inline-flex shrink-0 items-center gap-2 text-sm font-medium text-[var(--color-accent)] transition hover:gap-3"
           >
-            View all projects
+            {siteConfig.sections.featuredProjects.viewAllLabel}
             <ArrowUpRight size={16} />
           </Link>
         </div>

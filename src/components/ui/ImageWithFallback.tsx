@@ -43,6 +43,7 @@ export function ImageWithFallback({
       src={src}
       alt={alt}
       loading={loading}
+      decoding="async"
       fetchPriority={fetchPriority}
       sizes={sizes}
       onError={() => setFailed(true)}

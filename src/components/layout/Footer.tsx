@@ -102,7 +102,7 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="transition hover:text-white"
                 >
-                  WhatsApp
+                  {siteConfig.ctas.whatsapp.label}
                 </a>
               </li>
               <li className="max-w-xs leading-relaxed">{formatAddress()}</li>
@@ -110,7 +110,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-4 border-t border-white/10 pt-8 pb-16 text-sm text-white/45 sm:flex-row sm:items-center sm:justify-between sm:pb-0">
           <p>
             © {year} {company.name}. All rights reserved.
           </p>
@@ -123,7 +123,7 @@ export function Footer() {
             </Link>
           </div>
         </div>
-        <p className="mt-4 text-xs text-white/30">{siteConfig.demoNotice}</p>
+        <p className="mt-4 pb-4 text-xs text-white/30 sm:pb-0">{siteConfig.demoNotice}</p>
       </Container>
     </footer>
   )

@@ -1,6 +1,7 @@
 import { PageContainer } from '@/components/layout/PageContainer'
 import { Hero } from '@/components/sections/Hero'
 import { Stats } from '@/components/sections/Stats'
+import { Press } from '@/components/sections/Press'
 import { About } from '@/components/sections/About'
 import { Services } from '@/components/sections/Services'
 import { FeaturedProjects } from '@/components/sections/FeaturedProjects'
@@ -23,6 +24,7 @@ export function HomePage() {
     <PageContainer withTopPadding={false}>
       <Hero />
       <Stats />
+      <Press />
       <About compact />
       <Services limit={8} />
       <FeaturedProjects limit={4} />

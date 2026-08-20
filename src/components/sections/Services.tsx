@@ -56,9 +56,9 @@ export function Services({ limit, showHeading = true }: ServicesProps) {
         {showHeading ? (
           <div className="mb-12 flex flex-col gap-6 sm:mb-14 lg:flex-row lg:items-end lg:justify-between">
             <SectionHeading
-              eyebrow="What we do"
-              title="Services shaped around real homes and workplaces."
-              description="From first layout decisions to custom joinery and full execution — configured entirely from siteConfig."
+              eyebrow={siteConfig.sections.services.eyebrow}
+              title={siteConfig.sections.services.title}
+              description={siteConfig.sections.services.description}
               titleAs="h2"
             />
             <Link

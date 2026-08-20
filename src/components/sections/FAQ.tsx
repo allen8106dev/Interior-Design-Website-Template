@@ -11,9 +11,9 @@ export function FAQ() {
         <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <Reveal>
             <SectionHeading
-              eyebrow="FAQ"
-              title="Answers before the first site visit."
-              description="Common questions interior clients ask — edit freely in siteConfig.faqs."
+              eyebrow={siteConfig.sections.faq.eyebrow}
+              title={siteConfig.sections.faq.title}
+              description={siteConfig.sections.faq.description}
               titleAs="h2"
             />
             <h2 id="faq-heading" className="sr-only">

@@ -10,9 +10,9 @@ export function Process() {
     <section className="py-20 lg:py-28" aria-labelledby="process-heading">
       <Container>
         <SectionHeading
-          eyebrow="How we work"
-          title="A clear process from first conversation to handover."
-          description="Clients buy confidence as much as design. This sequence keeps decisions calm and accountable."
+          eyebrow={siteConfig.sections.process.eyebrow}
+          title={siteConfig.sections.process.title}
+          description={siteConfig.sections.process.description}
           className="mb-12 sm:mb-14"
           titleAs="h2"
         />

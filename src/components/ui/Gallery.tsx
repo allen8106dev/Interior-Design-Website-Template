@@ -48,7 +48,7 @@ export function Gallery({ images, className }: GalleryProps) {
             <button
               type="button"
               onClick={() => openAt(i)}
-              className="group relative block aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-md)] bg-[var(--color-canvas-muted)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] sm:aspect-auto sm:h-full sm:min-h-[220px]"
+              className="group relative block aspect-[4/3] w-full overflow-hidden rounded-[var(--radius-md)] bg-[var(--color-canvas-muted)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--color-accent)] sm:aspect-auto sm:h-full sm:min-h-[200px] lg:min-h-[220px]"
               aria-label={`Open image: ${image.alt}`}
             >
               <ImageWithFallback

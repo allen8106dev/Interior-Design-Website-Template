@@ -87,14 +87,20 @@ export interface ProjectItem {
   slug: string
   title: string
   location: string
+  /** Project type shown in meta (e.g. Residential, Kitchen). */
   category: string
   year: number
   coverImage: string
   coverImageAlt: string
   gallery: ProjectImage[]
+  /** Short design / concept description. */
   description: string
   challenge?: string
   solution?: string
+  /** Materials used — wood, stone, textiles, etc. */
+  materials?: string[]
+  /** Notable design elements / finishes. */
+  designElements?: string[]
   servicesProvided: string[]
   area?: string
   duration?: string
@@ -113,6 +119,13 @@ export interface TestimonialItem {
   projectType?: string
   rating?: number
   image?: string
+}
+
+/** Optional press / feature mentions — leave empty or use only real, approved credits. */
+export interface PressItem {
+  id: string
+  label: string
+  href?: string
 }
 
 export interface ProcessStep {
@@ -140,6 +153,29 @@ export interface CtaConfig {
   secondary: { label: string; href: string }
   whatsapp: { label: string }
   consultation: { label: string; href: string }
+  enquire: { label: string; href: string }
+  startProject: { label: string; href: string }
+}
+
+export interface SectionCopy {
+  eyebrow: string
+  title: string
+  description?: string
+}
+
+export interface SectionsContent {
+  featuredProjects: SectionCopy & { viewAllLabel: string }
+  services: SectionCopy
+  process: SectionCopy
+  whyChooseUs: SectionCopy
+  testimonials: SectionCopy
+  faq: SectionCopy
+  contact: SectionCopy
+  cta: { eyebrow: string; title: string; description: string }
+  statsNote?: string
+  projectsPage: SectionCopy
+  servicesPage: SectionCopy
+  contactPage: SectionCopy
 }
 
 export interface AboutContent {
@@ -175,6 +211,8 @@ export interface SiteConfig {
   hero: HeroContent
   about: AboutContent
   stats: StatItem[]
+  /** Optional press row — only add real, approved mentions. Empty = hidden. */
+  press: PressItem[]
   services: ServiceItem[]
   projects: ProjectItem[]
   testimonials: TestimonialItem[]
@@ -182,5 +220,6 @@ export interface SiteConfig {
   differentiators: Differentiator[]
   faqs: FaqItem[]
   ctas: CtaConfig
+  sections: SectionsContent
   formEndpoint?: string
 }

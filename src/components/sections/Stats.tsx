@@ -3,15 +3,17 @@ import { Container } from '@/components/ui/Container'
 import { Reveal } from '@/components/ui/Reveal'
 
 export function Stats() {
-  const { stats } = siteConfig
+  const { stats, sections } = siteConfig
   if (!stats.length) return null
 
   return (
     <section className="border-y border-[var(--color-border)] bg-[var(--color-surface)]" aria-label="Studio highlights">
       <Container className="py-10 lg:py-12">
-        <p className="mb-6 text-center text-[10px] font-medium uppercase tracking-[0.24em] text-[var(--color-ink-faint)]">
-          Demo stats — replace with verified figures
-        </p>
+        {sections.statsNote ? (
+          <p className="mb-6 text-center text-[10px] font-medium uppercase tracking-[0.24em] text-[var(--color-ink-faint)]">
+            {sections.statsNote}
+          </p>
+        ) : null}
         <ul className="grid grid-cols-2 gap-8 lg:grid-cols-4 lg:gap-6">
           {stats.map((stat, i) => (
             <Reveal key={stat.label} delayMs={i * 60}>

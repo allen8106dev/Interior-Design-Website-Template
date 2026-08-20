@@ -5,12 +5,13 @@
  *
  * DEMO CONTENT — REPLACE BEFORE CLIENT DEPLOYMENT
  *
- * To create a new client website:
+ * New client workflow:
  * 1. Copy this project
- * 2. Update every field in this file
- * 3. Replace images (coverImage, gallery, hero, about)
- * 4. Update branding colors in `src/index.css` (@theme) to match branding below
- * 5. Deploy
+ * 2. Update company, branding, seo, ctas, and contact fields below
+ * 3. Replace hero / about / project / service images
+ * 4. Replace projects, services, testimonials, stats (verified numbers only)
+ * 5. Sync branding colors in `src/index.css` (@theme)
+ * 6. Set formEndpoint (optional) and deploy
  *
  * Do not hardcode company details inside React components — change them here.
  * =============================================================================
@@ -20,18 +21,18 @@ import type { SiteConfig } from '@/types/site'
 
 /** High-quality Unsplash demos — swap for client photography before launch. */
 const images = {
-  hero: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=2000&q=80',
-  about: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1400&q=80',
-  living: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1600&q=80',
-  kitchen: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1600&q=80',
-  bedroom: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1600&q=80',
-  villa: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1600&q=80',
-  dining: 'https://images.unsplash.com/photo-1617806118233-18e1de3d13f1?auto=format&fit=crop&w=1600&q=80',
-  bathroom: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1600&q=80',
-  office: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1600&q=80',
-  detail: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1600&q=80',
-  corridor: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1600&q=80',
-  lounge: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=80',
+  hero: 'https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=1800&q=80',
+  about: 'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=1200&q=80',
+  living: 'https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=80',
+  kitchen: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?auto=format&fit=crop&w=1400&q=80',
+  bedroom: 'https://images.unsplash.com/photo-1616594039964-ae9021a400a0?auto=format&fit=crop&w=1400&q=80',
+  villa: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1400&q=80',
+  dining: 'https://images.unsplash.com/photo-1617806118233-18e1de3d13f1?auto=format&fit=crop&w=1400&q=80',
+  bathroom: 'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?auto=format&fit=crop&w=1400&q=80',
+  office: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1400&q=80',
+  detail: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=1400&q=80',
+  corridor: 'https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=1400&q=80',
+  lounge: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80',
 } as const
 
 export const siteConfig: SiteConfig = {
@@ -108,8 +109,8 @@ export const siteConfig: SiteConfig = {
     headline: 'Thoughtful interiors, designed around you.',
     subheadline:
       'We craft calm, functional spaces for modern Indian homes — from first sketch to final handover — with clarity, craft, and care.',
-    primaryCta: { label: 'Explore Our Work', href: '/projects' },
-    secondaryCta: { label: 'Book a Consultation', href: '/contact' },
+    primaryCta: { label: 'Book a Consultation', href: '/contact' },
+    secondaryCta: { label: 'View Our Projects', href: '/projects' },
     image: images.hero,
     imageAlt: 'Sunlit modern living room with soft neutrals and sculptural seating',
     indicator: { label: 'Projects completed', value: '150+' },
@@ -136,6 +137,16 @@ export const siteConfig: SiteConfig = {
     { value: '150+', label: 'Projects Delivered' },
     { value: '98%', label: 'Client Satisfaction' },
     { value: 'Pune', label: '& Maharashtra' },
+  ],
+
+  /**
+   * Press / features — leave empty unless you have real, approved mentions.
+   * Do not invent awards or publications. Demo entries below are clearly labeled.
+   */
+  press: [
+    { id: 'press-1', label: '[Demo] Local Design Journal' },
+    { id: 'press-2', label: '[Demo] City Living Feature' },
+    { id: 'press-3', label: '[Demo] Studio Spotlight' },
   ],
 
   services: [
@@ -240,6 +251,8 @@ export const siteConfig: SiteConfig = {
         'A typical builder layout with fragmented storage and limited natural light in the deeper zones of the home.',
       solution:
         'We opened key sightlines, introduced a muted material palette, and designed continuous joinery that absorbs daily clutter.',
+      materials: ['European oak', 'Lime plaster', 'Belgian linen', 'Honed limestone'],
+      designElements: ['Floor-to-ceiling joinery', 'Soft architectural lighting', 'Muted neutral palette'],
       servicesProvided: ['Residential Interiors', 'Space Planning', 'Custom Furniture'],
       gallery: [
         { src: images.living, alt: 'Living room seating arrangement' },
@@ -268,6 +281,8 @@ export const siteConfig: SiteConfig = {
         'A compact footprint that needed to support work-from-home without feeling like an office.',
       solution:
         'We used a quiet palette, multi-use furniture, and carefully placed lighting to create soft zones within a single open plan.',
+      materials: ['White oak', 'Cotton linen', 'Matte microcement'],
+      designElements: ['Concealed storage', 'Work niche', 'Layered ambient lighting'],
       servicesProvided: ['Residential Interiors', 'Bedroom Interiors', 'Space Planning'],
       gallery: [
         { src: images.bedroom, alt: 'Bedroom overview' },
@@ -294,6 +309,8 @@ export const siteConfig: SiteConfig = {
         'Large volumes that risked feeling cold or impersonal without careful layering.',
       solution:
         'We introduced warm materials at human scale, defined seating zones, and used lighting to soften vertical proportions.',
+      materials: ['Italian marble', 'Teak', 'Bouclé textiles', 'Brushed brass'],
+      designElements: ['Double-height living', 'Zoning with soft furniture', 'Warm vertical lighting'],
       servicesProvided: ['Residential Interiors', 'Custom Furniture', 'Living Room Design'],
       gallery: [
         { src: images.villa, alt: 'Villa living volume' },
@@ -322,6 +339,8 @@ export const siteConfig: SiteConfig = {
         'An outdated U-shaped kitchen with poor appliance placement and insufficient pantry storage.',
       solution:
         'A reconfigured layout with a central prep zone, tall pantry wall, and continuous stone surfaces for a calm, luxury finish.',
+      materials: ['Quartzite', 'Walnut veneer', 'Soft-close hardware'],
+      designElements: ['Tall pantry wall', 'Continuous stone counters', 'Integrated appliance bank'],
       servicesProvided: ['Modular Kitchens', 'Renovation & Remodeling'],
       gallery: [
         { src: images.kitchen, alt: 'Kitchen overview' },
@@ -347,6 +366,8 @@ export const siteConfig: SiteConfig = {
         'An open floor plate that needed private focus areas without building heavy partitions.',
       solution:
         'We used low furniture, soft screening, and lighting layers to create distinct work modes within one volume.',
+      materials: ['Ash timber', 'Acoustic felt', 'Porcelain tile'],
+      designElements: ['Soft screening', 'Focus pods', 'Brand-aligned palette'],
       servicesProvided: ['Commercial Interiors', 'Space Planning', 'Custom Furniture'],
       gallery: [
         { src: images.office, alt: 'Open work area' },
@@ -372,6 +393,8 @@ export const siteConfig: SiteConfig = {
         'A dated layout with awkward wet areas and insufficient storage.',
       solution:
         'We reorganized wet and dry zones, introduced a floating vanity, and selected materials that feel calm under warm light.',
+      materials: ['Travertine', 'Matte porcelain', 'Brushed nickel'],
+      designElements: ['Floating vanity', 'Wet/dry zoning', 'Warm recessed lighting'],
       servicesProvided: ['Renovation & Remodeling'],
       gallery: [
         { src: images.bathroom, alt: 'Bathroom vanity' },
@@ -526,8 +549,79 @@ export const siteConfig: SiteConfig = {
   ctas: {
     primary: { label: 'Book a Consultation', href: '/contact' },
     secondary: { label: 'View Our Projects', href: '/projects' },
-    whatsapp: { label: 'Chat on WhatsApp' },
-    consultation: { label: 'Discuss Your Project', href: '/contact' },
+    whatsapp: { label: 'WhatsApp Us' },
+    consultation: { label: 'Book a Consultation', href: '/contact' },
+    enquire: { label: 'Enquire Now', href: '/contact' },
+    startProject: { label: 'Start Your Project', href: '/contact' },
+  },
+
+  sections: {
+    featuredProjects: {
+      eyebrow: 'Selected work',
+      title: 'Interiors that feel lived-in from day one.',
+      description:
+        'Demo projects for layout and storytelling — replace with your client’s real photography and case studies.',
+      viewAllLabel: 'View all projects',
+    },
+    services: {
+      eyebrow: 'What we do',
+      title: 'Services shaped around real homes and workplaces.',
+      description:
+        'From first layout decisions to custom joinery and full execution — configured entirely from siteConfig.',
+    },
+    process: {
+      eyebrow: 'How we work',
+      title: 'A clear process from first conversation to handover.',
+      description:
+        'Clients buy confidence as much as design. This sequence keeps decisions calm and accountable.',
+    },
+    whyChooseUs: {
+      eyebrow: 'Why choose us',
+      title: 'Design discipline with delivery you can trust.',
+      description:
+        'Differentiators are fully configurable — tailor this list to each studio’s real strengths.',
+    },
+    testimonials: {
+      eyebrow: 'Client voices',
+      title: 'What collaboration can feel like.',
+      description:
+        'DEMO TESTIMONIALS — replace with real reviews and written permission before client deployment.',
+    },
+    faq: {
+      eyebrow: 'FAQ',
+      title: 'Answers before the first site visit.',
+      description: 'Common questions interior clients ask — edit freely in siteConfig.faqs.',
+    },
+    contact: {
+      eyebrow: 'Contact',
+      title: 'Let’s talk about your project.',
+      description: 'Call, WhatsApp, or send a short brief — whichever feels easiest.',
+    },
+    cta: {
+      eyebrow: 'Start a conversation',
+      title: 'Ready to start your project?',
+      description:
+        'Tell us about your home or workplace. We’ll help you understand scope, timeline, and the right next step.',
+    },
+    statsNote: 'Demo stats — replace with verified figures',
+    projectsPage: {
+      eyebrow: 'Projects',
+      title: 'A selection of spaces we’ve shaped.',
+      description:
+        'DEMO PROJECTS — replace covers, galleries, and case-study copy with real client work before deployment.',
+    },
+    servicesPage: {
+      eyebrow: 'Services',
+      title: 'Design services for homes and workplaces.',
+      description:
+        'Explore how we plan, design, and execute interiors — from single rooms to full residences.',
+    },
+    contactPage: {
+      eyebrow: 'Contact',
+      title: 'Book a consultation or send an enquiry.',
+      description:
+        'Share a few details about your space — or message us on WhatsApp for a faster start.',
+    },
   },
 
   /** Leave empty to use the built-in mock submitter. Set to Formspree/EmailJS URL later. */
