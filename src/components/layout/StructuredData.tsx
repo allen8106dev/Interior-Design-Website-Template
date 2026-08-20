@@ -1,18 +1,21 @@
 import { useEffect } from 'react'
 import { siteConfig } from '@/data/siteConfig'
 import { formatAddress } from '@/utils/site'
+import { getAbsoluteAppUrl, getSiteOrigin, getAppBasePath } from '@/utils/basePath'
 
 export function StructuredData() {
   useEffect(() => {
     const { company, seo, social, services } = siteConfig
     const sameAs = Object.values(social).filter(Boolean)
+    const siteUrl = getAbsoluteAppUrl('/')
+    const originBase = `${getSiteOrigin()}${getAppBasePath()}`
 
     const localBusiness = {
       '@context': 'https://schema.org',
       '@type': 'HomeAndConstructionBusiness',
       name: company.name,
       description: seo.defaultDescription,
-      url: seo.siteUrl,
+      url: siteUrl,
       telephone: company.phone,
       email: company.email,
       image: seo.ogImage,
@@ -33,8 +36,12 @@ export function StructuredData() {
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: company.name,
-      url: seo.siteUrl,
-      logo: siteConfig.branding.logoSrc ?? seo.ogImage,
+      url: siteUrl,
+      logo: siteConfig.branding.logoSrc
+        ? siteConfig.branding.logoSrc.startsWith('http')
+          ? siteConfig.branding.logoSrc
+          : `${originBase}/${siteConfig.branding.logoSrc.replace(/^\//, '')}`
+        : seo.ogImage,
       contactPoint: {
         '@type': 'ContactPoint',
         telephone: company.phone,

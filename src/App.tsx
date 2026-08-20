@@ -1,4 +1,4 @@
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { HashRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { RootLayout } from '@/components/layout/RootLayout'
 import { HomePage } from '@/pages/HomePage'
 import { AboutPage } from '@/pages/AboutPage'
@@ -10,9 +10,18 @@ import { PrivacyPage } from '@/pages/PrivacyPage'
 import { TermsPage } from '@/pages/TermsPage'
 import { NotFoundPage } from '@/pages/NotFoundPage'
 
+/**
+ * HashRouter (not BrowserRouter) keeps routing portable across:
+ * - localhost
+ * - Vercel / Netlify / static root hosts
+ * - GitHub Pages (and any) repository subpaths
+ *
+ * without a deploy-specific `base` or server rewrite rules for client routes.
+ * In-app Link paths stay the same ("/about", "/projects/:slug", …).
+ */
 export default function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route element={<RootLayout />}>
           <Route index element={<HomePage />} />
@@ -27,6 +36,6 @@ export default function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   )
 }

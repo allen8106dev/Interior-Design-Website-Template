@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { useScrollPosition } from '@/hooks/useScrollPosition'
 import { cn } from '@/utils/site'
+import { publicUrl } from '@/utils/basePath'
 
 export function Navbar() {
   const scrolled = useScrollPosition(16)
@@ -27,9 +28,15 @@ export function Navbar() {
     return () => window.removeEventListener('keydown', onKey)
   }, [])
 
-  const logo = siteConfig.branding.logoSrc ? (
+  const logoSrc = siteConfig.branding.logoSrc
+    ? siteConfig.branding.logoSrc.startsWith('http')
+      ? siteConfig.branding.logoSrc
+      : publicUrl(siteConfig.branding.logoSrc)
+    : undefined
+
+  const logo = logoSrc ? (
     <img
-      src={siteConfig.branding.logoSrc}
+      src={logoSrc}
       alt={siteConfig.branding.logoAlt ?? siteConfig.company.name}
       className="h-8 w-auto"
     />

@@ -11,6 +11,7 @@ import { Reveal } from '@/components/ui/Reveal'
 import { useSeo } from '@/hooks/useSeo'
 import { siteConfig } from '@/data/siteConfig'
 import { getProjectBySlug } from '@/utils/site'
+import { getAbsoluteAppUrl } from '@/utils/basePath'
 import { useEffect } from 'react'
 
 export function ProjectDetailsPage() {
@@ -31,18 +32,18 @@ export function ProjectDetailsPage() {
       '@context': 'https://schema.org',
       '@type': 'BreadcrumbList',
       itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: siteConfig.seo.siteUrl },
+        { '@type': 'ListItem', position: 1, name: 'Home', item: getAbsoluteAppUrl('/') },
         {
           '@type': 'ListItem',
           position: 2,
           name: 'Projects',
-          item: `${siteConfig.seo.siteUrl}/projects`,
+          item: getAbsoluteAppUrl('/projects'),
         },
         {
           '@type': 'ListItem',
           position: 3,
           name: project.title,
-          item: `${siteConfig.seo.siteUrl}/projects/${project.slug}`,
+          item: getAbsoluteAppUrl(`/projects/${project.slug}`),
         },
       ],
     }

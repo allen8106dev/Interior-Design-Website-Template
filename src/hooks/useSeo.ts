@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { buildPageTitle } from '@/utils/site'
+import { getAbsoluteAppUrl } from '@/utils/basePath'
 import { siteConfig } from '@/data/siteConfig'
 
 interface SeoProps {
@@ -42,7 +43,7 @@ export function useSeo({
 }: SeoProps = {}) {
   const location = useLocation()
   const pagePath = path ?? location.pathname
-  const canonical = `${siteConfig.seo.siteUrl.replace(/\/$/, '')}${pagePath === '/' ? '' : pagePath}`
+  const canonical = getAbsoluteAppUrl(pagePath)
   const pageTitle = buildPageTitle(title)
   const desc = description ?? siteConfig.seo.defaultDescription
   const ogImage = image ?? siteConfig.seo.ogImage

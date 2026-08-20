@@ -7,6 +7,10 @@ import { fileURLToPath } from 'node:url'
 const rootDir = path.dirname(fileURLToPath(import.meta.url))
 
 export default defineConfig({
+  // Relative base keeps one build portable across domain root and subpaths
+  // (GitHub Pages project sites, nested static folders, etc.) without hardcoding.
+  // Pair with HashRouter so deep links never break relative asset resolution.
+  base: './',
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
