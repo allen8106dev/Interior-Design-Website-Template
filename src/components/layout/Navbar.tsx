@@ -41,7 +41,7 @@ export function Navbar() {
       className="h-8 w-auto"
     />
   ) : (
-    <span className="font-display text-xl font-semibold tracking-wide text-[var(--color-ink)] sm:text-2xl">
+    <span className="font-display text-[1.375rem] font-semibold tracking-wide text-[var(--color-ink)] sm:text-[1.65rem]">
       {siteConfig.branding.logoText ?? siteConfig.company.name}
     </span>
   )
@@ -51,8 +51,8 @@ export function Navbar() {
       className={cn(
         'fixed inset-x-0 top-0 z-50 transition-all duration-300',
         scrolled || open
-          ? 'border-b border-[var(--color-border)] bg-[rgb(245_242_237/0.94)] backdrop-blur-md'
-          : 'bg-transparent',
+          ? 'border-b border-[var(--color-border)] bg-[rgb(245_242_237/0.97)] shadow-[0_1px_0_rgb(28_27_26/0.06)] backdrop-blur-md'
+          : 'border-b border-[rgb(28_27_26/0.08)] bg-[rgb(245_242_237/0.88)] shadow-[0_8px_24px_rgb(28_27_26/0.08)] backdrop-blur-md',
       )}
     >
       <Container className="flex h-[4.25rem] items-center justify-between lg:h-[5rem]">
@@ -67,8 +67,8 @@ export function Navbar() {
               to={item.href}
               className={({ isActive }) =>
                 cn(
-                  'relative text-sm font-medium tracking-wide text-[var(--color-ink-soft)] transition after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-[var(--color-ink)] after:transition-all after:duration-300 hover:text-[var(--color-ink)] hover:after:w-full',
-                  isActive && 'text-[var(--color-ink)] after:w-full',
+                  'relative text-[0.9375rem] font-medium tracking-[0.04em] text-[var(--color-ink)] transition after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-[var(--color-ink)] after:transition-all after:duration-300 hover:text-[var(--color-accent)] hover:after:w-full',
+                  isActive && 'text-[var(--color-accent)] after:w-full',
                 )
               }
             >
@@ -97,20 +97,30 @@ export function Navbar() {
             aria-label={open ? 'Close menu' : 'Open menu'}
             onClick={() => setOpen((v) => !v)}
           >
-            {open ? <X size={22} /> : <Menu size={22} />}
+            {open ? <X size={24} strokeWidth={2} /> : <Menu size={22} />}
           </button>
         </div>
       </Container>
 
+      {/* Mobile backdrop — separates drawer from page content */}
+      <div
+        className={cn(
+          'fixed inset-0 z-40 bg-[rgb(28_27_26/0.5)] transition-opacity duration-300 lg:hidden',
+          open ? 'pointer-events-auto opacity-100' : 'pointer-events-none opacity-0',
+        )}
+        aria-hidden={!open}
+        onClick={() => setOpen(false)}
+      />
+
       <div
         id={menuId}
         className={cn(
-          'fixed inset-0 z-40 bg-[var(--color-canvas)] pt-[4.25rem] transition-transform duration-300 ease-out lg:hidden',
+          'fixed inset-y-0 right-0 z-40 flex w-[min(100%,22rem)] flex-col border-l border-[var(--color-border-strong)] bg-[var(--color-surface)] pt-[4.25rem] shadow-[var(--shadow-lift)] transition-transform duration-300 ease-out lg:hidden',
           open ? 'translate-x-0' : 'translate-x-full',
         )}
       >
-        <nav className="flex h-full flex-col px-5 pb-10" aria-label="Mobile">
-          <ul className="flex flex-1 flex-col gap-1 pt-6">
+        <nav className="flex h-full flex-col px-6 pb-10" aria-label="Mobile">
+          <ul className="flex flex-1 flex-col gap-0 pt-4">
             {siteConfig.navigation.map((item) => (
               <li key={item.href}>
                 <NavLink
@@ -118,8 +128,8 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className={({ isActive }) =>
                     cn(
-                      'block border-b border-[var(--color-border)] py-4 font-display text-3xl text-[var(--color-ink-soft)]',
-                      isActive && 'text-[var(--color-ink)]',
+                      'block border-b border-[var(--color-border)] py-4 font-display text-[1.75rem] font-medium leading-tight text-[var(--color-ink)] transition-colors hover:text-[var(--color-accent)]',
+                      isActive && 'text-[var(--color-accent)]',
                     )
                   }
                 >
