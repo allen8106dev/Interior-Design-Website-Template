@@ -47,62 +47,69 @@ export function Navbar() {
   )
 
   return (
-    <header
-      className={cn(
-        'fixed inset-x-0 top-0 z-50 transition-all duration-300',
-        scrolled || open
-          ? 'border-b border-[var(--color-border)] bg-[rgb(245_242_237/0.97)] shadow-[0_1px_0_rgb(28_27_26/0.06)] backdrop-blur-md'
-          : 'border-b border-[rgb(28_27_26/0.08)] bg-[rgb(245_242_237/0.88)] shadow-[0_8px_24px_rgb(28_27_26/0.08)] backdrop-blur-md',
-      )}
-    >
-      <Container className="flex h-[4.25rem] items-center justify-between lg:h-[5rem]">
-        <Link to="/" className="relative z-50" onClick={() => setOpen(false)}>
-          {logo}
-        </Link>
+    <>
+      <header
+        className={cn(
+          'fixed inset-x-0 top-0 z-50 transition-all duration-300',
+          scrolled || open
+            ? 'border-b border-[var(--color-border)] bg-[rgb(245_242_237/0.97)] shadow-[0_1px_0_rgb(28_27_26/0.06)] backdrop-blur-md'
+            : 'border-b border-[rgb(28_27_26/0.08)] bg-[rgb(245_242_237/0.88)] shadow-[0_8px_24px_rgb(28_27_26/0.08)] backdrop-blur-md',
+        )}
+      >
+        <Container className="flex h-[4.25rem] items-center justify-between lg:h-[5rem]">
+          <Link to="/" className="relative z-50" onClick={() => setOpen(false)}>
+            {logo}
+          </Link>
 
-        <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
-          {siteConfig.navigation.map((item) => (
-            <NavLink
-              key={item.href}
-              to={item.href}
-              className={({ isActive }) =>
-                cn(
-                  'relative text-[0.9375rem] font-medium tracking-[0.04em] text-[var(--color-ink)] transition after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-[var(--color-ink)] after:transition-all after:duration-300 hover:text-[var(--color-accent)] hover:after:w-full',
-                  isActive && 'text-[var(--color-accent)] after:w-full',
-                )
-              }
-            >
-              {item.label}
-            </NavLink>
-          ))}
-        </nav>
+          <nav className="hidden items-center gap-8 lg:flex" aria-label="Primary">
+            {siteConfig.navigation.map((item) => (
+              <NavLink
+                key={item.href}
+                to={item.href}
+                className={({ isActive }) =>
+                  cn(
+                    'relative text-[0.9375rem] font-medium tracking-[0.04em] text-[var(--color-ink)] transition after:absolute after:-bottom-1 after:left-0 after:h-px after:w-0 after:bg-[var(--color-ink)] after:transition-all after:duration-300 hover:text-[var(--color-accent)] hover:after:w-full',
+                    isActive && 'text-[var(--color-accent)] after:w-full',
+                  )
+                }
+              >
+                {item.label}
+              </NavLink>
+            ))}
+          </nav>
 
-        <div className="hidden lg:block">
-          <Button href={siteConfig.ctas.primary.href} size="sm">
-            {siteConfig.ctas.primary.label}
-          </Button>
-        </div>
-
-        <div className="relative z-50 flex items-center gap-2 lg:hidden">
-          {!open ? (
-            <Button href={siteConfig.ctas.primary.href} size="sm" className="px-3 text-xs sm:px-4 sm:text-sm">
-              {siteConfig.ctas.enquire.label}
+          <div className="hidden lg:block">
+            <Button href={siteConfig.ctas.primary.href} size="sm">
+              {siteConfig.ctas.primary.label}
             </Button>
-          ) : null}
-          <button
-            type="button"
-            className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] text-[var(--color-ink)]"
-            aria-expanded={open}
-            aria-controls={menuId}
-            aria-label={open ? 'Close menu' : 'Open menu'}
-            onClick={() => setOpen((v) => !v)}
-          >
-            {open ? <X size={24} strokeWidth={2} /> : <Menu size={22} />}
-          </button>
-        </div>
-      </Container>
+          </div>
 
-      {/* Mobile backdrop — separates drawer from page content */}
+          <div className="relative z-50 flex items-center gap-2 lg:hidden">
+            {!open ? (
+              <Button href={siteConfig.ctas.primary.href} size="sm" className="px-3 text-xs sm:px-4 sm:text-sm">
+                {siteConfig.ctas.enquire.label}
+              </Button>
+            ) : null}
+            <button
+              type="button"
+              className="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] text-[var(--color-ink)]"
+              aria-expanded={open}
+              aria-controls={menuId}
+              aria-label={open ? 'Close menu' : 'Open menu'}
+              onClick={() => setOpen((v) => !v)}
+            >
+              {open ? <X size={24} strokeWidth={2} /> : <Menu size={22} />}
+            </button>
+          </div>
+        </Container>
+      </header>
+
+      {/*
+        Mobile overlays MUST live outside the frosted header.
+        The header applies backdrop-filter, which creates a containing block for
+        position:fixed descendants — collapsing the drawer to ~header height and
+        letting nav text spill onto the page with no opaque panel behind it.
+      */}
       <div
         className={cn(
           'fixed inset-0 z-40 bg-[rgb(28_27_26/0.5)] transition-opacity duration-300 lg:hidden',
@@ -115,11 +122,12 @@ export function Navbar() {
       <div
         id={menuId}
         className={cn(
-          'fixed inset-y-0 right-0 z-40 flex w-[min(100%,22rem)] flex-col border-l border-[var(--color-border-strong)] bg-[var(--color-surface)] pt-[4.25rem] shadow-[var(--shadow-lift)] transition-transform duration-300 ease-out lg:hidden',
+          'fixed inset-y-0 right-0 z-[45] flex w-[min(100%,22rem)] flex-col border-l border-[var(--color-border-strong)] bg-white pt-[4.25rem] shadow-[var(--shadow-lift)] transition-transform duration-300 ease-out lg:hidden',
           open ? 'translate-x-0' : 'translate-x-full',
         )}
+        style={{ backgroundColor: '#ffffff' }}
       >
-        <nav className="flex h-full flex-col px-6 pb-10" aria-label="Mobile">
+        <nav className="flex h-full flex-col bg-white px-6 pb-10" aria-label="Mobile">
           <ul className="flex flex-1 flex-col gap-0 pt-4">
             {siteConfig.navigation.map((item) => (
               <li key={item.href}>
@@ -143,6 +151,6 @@ export function Navbar() {
           </Button>
         </nav>
       </div>
-    </header>
+    </>
   )
 }
